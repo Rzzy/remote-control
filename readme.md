@@ -88,7 +88,7 @@ module.exports = override(addRendererTarget)
 ```
 
 ```js
-import* { ipcRenderer } *from* 'electron' 
+import { ipcRenderer } from 'electron' 
 ```
 
 
