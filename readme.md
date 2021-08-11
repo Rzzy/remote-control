@@ -66,9 +66,9 @@ if (isDev) {
 
 方法1：
 
-`const { ipcRenderer } *=* window.require('electron')`
+`const { ipcRenderer } = window.require('electron')`
 
-方法2: 修改webpack的target
+方法2: 修改webpack的target，使用`customize-cra, react-app-rewired`这两个库
 
 ```js
 npm i customize-cra react-app-rewired --save-dev
@@ -95,6 +95,19 @@ import { ipcRenderer } from 'electron'
 
 
 
-### 一条命令启动工程
+### 一条命令启动工程：主要是用`concurrently ，wait-on`这两个库
 
-todo
+```js
+npm i concurrently  wait-on --save-dev
+```
+
+
+
+```json
+"scripts": {
+  	"start":"concurrently \"npm run start:render\" \"wait-on http://localhost:3000 && npm run start:electron \""
+},
+```
+
+
+

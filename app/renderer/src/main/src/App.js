@@ -1,7 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
 // const { ipcRenderer } = window.require('electron')
-import { ipcRenderer } from 'electron'
+// import { ipcRenderer } from 'electron'
 
 function App() {
   return (
