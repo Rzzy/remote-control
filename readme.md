@@ -42,3 +42,59 @@
 - 启动命令适配。等到编译成功再启动 ELectron
   - concurently 
   - wait on
+
+
+### react的启动命令中加入BROWSER=NONE的参数可以取消打开浏览器
+`"start": "BROWSER=NONE react-scripts start",`
+
+`start:electron: "electron ."`  用来启动electron工程
+
+`"start:render": "cd app/renderer/src/main && npm start"` 用来启动react的页面工程
+
+### 区分正式环境和测时环境
+```js
+npm install electron-is-dev
+const isDev = require('electron-is-dev');
+if (isDev) {
+	console.log('Running in development');
+} else {
+	console.log('Running in production');
+}
+```
+
+### 主页面引入electron的方法
+
+方法1：
+
+`const { ipcRenderer } *=* window.require('electron')`
+
+方法2: 修改webpack的target
+
+```js
+npm i customize-cra react-app-rewired --save-dev
+```
+
+config-overrides.js
+
+```js
+const { override } = require('customize-cra')
+
+function addRendererTarget(config){
+	config.target = 'electron-renderer'
+	return config
+}
+
+module.exports = override(addRendererTarget)
+```
+
+```js
+import* { ipcRenderer } *from* 'electron' 
+```
+
+
+
+
+
+### 一条命令启动工程
+
+todo

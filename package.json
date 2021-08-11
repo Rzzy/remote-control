@@ -1,0 +1,29 @@
+{
+  "name": "remote-control",
+  "version": "1.0.0",
+  "description": "1. 傀儡端告知控制端本机控制码    - 建立端与控制码的关系 2. 控制端输入控制码连接傀儡端     - 通过控制码找到用户 -> 服务端需求    - 建立用户间连接 -> 服务端需求 or 客户端需求 3. 傀儡端将捕获的画面传至控制端     - 捕获画面 、播放画面-> 客户端需求    - 用户间画面传输 -> 服务端需求/客户端需求 4. 控制端的鼠标和键盘指令传送至傀儡端     - 捕获指令 -> 客户端需求    - 用户间指令传输 -> 服务端需求/客户端需求 5. 傀儡端响应控制指令    - 响应指令 -> 客户端需求",
+  "main": "app/main/index.js",
+  "scripts": {
+    "start:electron": "electron .",
+    "start:render": "cd app/renderer/src/main && npm start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Rzzy/remote-control.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Rzzy/remote-control/issues"
+  },
+  "homepage": "https://github.com/Rzzy/remote-control#readme",
+  "devDependencies": {
+    "customize-cra": "^1.0.0",
+    "electron": "^13.1.8",
+    "react-app-rewired": "^2.1.8"
+  },
+  "dependencies": {
+    "electron-is-dev": "^2.0.0"
+  }
+}
