@@ -14,9 +14,8 @@ function App() {
      * 登陆状态在主进程维护 通过ipcReenderer给主进程发起一个消息
        主进程登陆成功后，会返回一个code
      */
-
-    let code = ipcRenderer.invoke('login')
-
+    let code = await ipcRenderer.invoke('login')
+   
     setLocalCode(code)
   }
   useEffect(() => {
@@ -27,15 +26,30 @@ function App() {
     }
 
   }, [])
-  const handleControlState = () => {}
+  const startControl = remoteCode => {
+    ipcRenderer.send('control', remoteCode)
+  }
+  const handleControlState = (e, name, type) => {
+    let text = ''
+    if(type === 1) {
+      text = `正在远程控制${name}的桌面`
+    } else {
+      text = `被${name}远程控制中`
+    }
+    setControlText(text)
+  }
   return (
     <div className="App">
       {
         controlText === '' ? <>
           <div> 你的控制码 { localCode }</div>
-          <input type='text' value={ remoteCode } />
-          <button>确认</button>
-        </>: <div> { controlText } </div>
+          <input type='text' value={ remoteCode } onChange = {e=> {
+            setRemoteCode(e.target.value)
+          }}/>
+          <button onClick= {()=>{
+            startControl(remoteCode)
+          }}>确认</button>
+        </> : <div> { controlText } </div>
       }    
     </div>
   );
