@@ -6,7 +6,9 @@
   "scripts": {
     "start:electron": "electron .",
     "start:render": "cd app/renderer/src/main && npm start",
-    "start":"concurrently \"npm run start:render\" \"wait-on http://localhost:3000 && npm run start:electron \""
+    "start": "concurrently \"npm run start:render\" \"wait-on http://localhost:3000 && npm run start:electron \"",
+    "start-win:render": "cd app/renderer/src/main && npm run start-win",
+    "start-win":"concurrently \"SET BROWSER=none&&npm run start-win:render\" \"wait-on http://localhost:3000 && electron .\""
   },
   "repository": {
     "type": "git",
