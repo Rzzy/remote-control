@@ -1,9 +1,10 @@
-const {  BrowserWindow } = require('electron')
+const { BrowserWindow } = require('electron')
 const isDev = require('electron-is-dev')
 const path = require('path')
 
+let win
 function create(){
-    let win = new BrowserWindow({
+    win = new BrowserWindow({
         width: 900,
         height: 500,
         webPreferences: {
@@ -19,5 +20,8 @@ function create(){
     win.webContents.openDevTools()
     return win
 }
+function send(channel, ...args) {
+    win.webContents.send(channel, ...args)
+}
 
-module.exports = { create }
+module.exports = { create, send }
