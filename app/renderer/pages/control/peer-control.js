@@ -1,14 +1,14 @@
 /*
  * @Author: Rz
  * @Date: 2021-08-19 21:34:30
- * @LastEditTime: 2021-08-19 22:03:58
+ * @LastEditTime: 2021-08-20 01:05:26
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \remote-control\app\renderer\pages\control\peer-control.js
  */
 
 const EventEmitter = require('events') // Node.js EventEmitter
-const { desktopCapturer } = require('electron')
+const { desktopCapturer, ipcRenderer } = require('electron')
 const peer = new EventEmitter()
 /**
  * @description: 获取桌面流
@@ -36,4 +36,15 @@ async function getScreenStream(){
     })
 }
 getScreenStream()
+
+peer.on('robot', (type, data) => {
+    if(type === 'mouse') {
+        data.screen = {
+            width: window.screen.width,
+            height: window.screen.height
+        }
+    }
+    ipcRenderer.send('robot', type, data) 
+})
+
 module.exports = peer
