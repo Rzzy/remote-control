@@ -120,3 +120,43 @@ npm i concurrently  wait-on --save-dev
 ### 连接状态：未连接、正在控制屏幕、屏幕被控制中
 
 ### 确认按钮点击后，创建控制屏幕窗口
+
+### 如何捕获桌面/窗口流
+
+通过Electron desktopCapturer捕获画面
+
+```js
+const sources = await desktopCapturer.getSources({types:['screen']})
+navigator.getUserMedia({
+    audio:false,
+    video:{
+        mandatory: {
+            chromeMediaSource: 'desktop',
+            chromeMediaSourceId:sources[0].id,
+            maxWidth:window.screen.width,
+            maxHeight:window.screen.height
+        }
+    }
+}, (stream) => {
+    peer.emit('add-stream', stream)
+}, err => {
+    console.err(err)
+})
+```
+
+### 如何响应指令
+
+``  robotjs``
+
+解决window先安装 ``robotjs``报错的问题 ·https://juejin.cn/post/6891143846105710599
+
+手动编译
+
+- npm rebuild --runtime=electron --target=<electron版本> --disturl=https://atom.io/download/atom-shell --abi=<abi版本>
+
+- process.versions.electron，可以看到electron版本
+
+- process.versions.node 可以看到 node 版本，之后再[abi_crosswalk](https://github.com/mapbox/node-pre-gyp/blob/master/lib/util/abi_crosswalk.json)查找 abi
+
+
+

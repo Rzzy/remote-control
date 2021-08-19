@@ -11,7 +11,7 @@ function create(){
         }
     })
     
-    win.loadURL(path.resolve(__dirname, '../../renderer/pages/control.html'))
+    win.loadURL(path.resolve(__dirname, '../../renderer/pages/control/index.html'))
     win.webContents.openDevTools()
 
     return win
